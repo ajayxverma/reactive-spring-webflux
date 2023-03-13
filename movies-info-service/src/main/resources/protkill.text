@@ -1,0 +1,21 @@
+CMD as run as administrator
+Enter netstat -a -o -n and hit enter. Now you can see like below. Port can see Local Address column after : sign.
+enter image description here
+
+select the process id(not port) that your port running and type taskkill /F /PID <process_id_here> command and hit enter.
+
+
+> netstat -ano | findstr *<port used>*
+
+  TCP    0.0.0.0:*<port used>*  0.0.0.0:0              LISTENING       *<pid>*
+  TCP    [::]:*<port used>*     [::]:0                 LISTENING       *<pid>*
+
+> taskkill /F /PID *<pid>*
+SUCCESS: The process with PID *<pid>* has been terminated.
+
+PS S:\Technology Learning\Reactive Programming\reactive-spring-webflux-2> netstat -ano | findstr 8080
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       11620
+  TCP    [::]:8080              [::]:0                 LISTENING       11620
+PS S:\Technology Learning\Reactive Programming\reactive-spring-webflux-2> taskkill /F /PID 11620
+SUCCESS: The process with PID 11620 has been terminated.
+PS S:\Technology Learning\Reactive Programming\reactive-spring-webflux-2>
